@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>Text Summarizer</h1>
+        <form action="/summarize" method="post">
+            <textarea name="text" placeholder="Enter text..."></textarea>
+            <br>
+            <button type="submit">Summarize</button>
+            
+            <button type="button" onclick="openARPage()">AR</button>
+            <button onclick="playEnglishVideo()">Play English Video</button>
+            <div class="dropdown">
+                <button class="dropbtn">Tune on Native Language</button>
+                <div class="dropdown-content" id="languageDropdown">
+                    <button onclick="changeVideo('English')">English</button>
+                    <button onclick="changeVideo('Tamil')">Tamil</button>
+                    <!-- Add more language options as needed -->
+                </div>
+            </div>
+            <video id="myVideo" width="320" height="240" style="display: none;">
+                <source id="videoSource" src="{{ url_for('static', filename='videos/English.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <button id="pauseButton1" style="display: none;" onclick="togglePause('myVideo')">Pause</button>
+            <button id="resumeButton1" style="display: none;" onclick="toggleResume('myVideo')">Resume</button>
+            <br><br>
+            
+            <video id="myVideo1" width="320" height="240" style="display: none;">
+                <source id="videoSource1" src="{{ url_for('static', filename='videos/Tamil.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <button id="pauseButton2" style="display: none;" onclick="togglePause('myVideo1')">Pause</button>
+            <button id="resumeButton2" style="display: none;" onclick="toggleResume('myVideo1')">Resume</button>
+        </form>
+        {% if summary %}
+            <h2>Summary</h2>
+            <p>{{ summary }}</p>
+        {% endif %}
+    </div>
+
+    <script>
+        function playEnglishVideo() {
+            var video = document.getElementById("myVideo");
+            var source = document.getElementById("videoSource");
+            source.src = "{{ url_for('static', filename='videos/Tamil.mp4') }}";
+            video.style.display = "block";
+            video.play();
+        }
+        function openARPage() {
+            window.location.href = "/ar"; // Navigate to the AR page
+        }
+        function changeVideo(language) 
+        {
+            var video;
+            var videoId;
+            var videoSrc;
+            if (language === 'English') 
+            {
+                videoId = 'myVideo';
+                videoSrc = "{{ url_for('static', filename='videos/English.mp4') }}";
+            } 
+            else if (language === 'Tamil') {
+                videoId = 'myVideo1';
+                videoSrc = "{{ url_for('static', filename='videos/Tamil.mp4') }}";
+            } 
+            else {
+                // Default to English if the selected language is not recognized
+                videoId = 'myVideo';
+                videoSrc = "{{ url_for('static', filename='videos/Tamil.mp4') }}";
+            }
+            video = document.getElementById(videoId);
+            var source = document.getElementById("videoSource");// Get the source element inside the video element
+            source.src = videoSrc;
+            video.style.display = "block";
+            video.play();
+        }
+        function togglePause(videoId) {
+            var video = document.getElementById(videoId);
+            video.pause();
+        }
+
+        function toggleResume(videoId) {
+            var video = document.getElementById(videoId);
+            video.play();
+        }
+
+        document.getElementById('myVideo').addEventListener('play', function() {
+            document.getElementById('pauseButton1').style.display = 'inline-block';
+            document.getElementById('resumeButton1').style.display = 'inline-block';
+        });
+
+        document.getElementById('myVideo1').addEventListener('play', function() {
+            document.getElementById('pauseButton2').style.display = 'inline-block';
+            document.getElementById('resumeButton2').style.display = 'inline-block';
+        });
+    </script>
+</body>
+</html>

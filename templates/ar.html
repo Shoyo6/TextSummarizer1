@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .pink-to-white {
+            background-color: #ff69b4;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .pink-to-white:hover {
+            background-color: #fff;
+            color: #ff69b4;
+        }
+        .white-to-pink {
+            background-color: #fff;
+            color: #ff69b4;
+            border: 1px solid #ff69b4;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .white-to-pink:hover {
+            background-color: #ff69b4;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section">
+            <figure>
+                <img src="Pancreas.png" alt="Pancreas">
+                <figcaption>Pancreas</figcaption>
+                <br>
+                <div class="buttons">
+                    <a href="https://mywebar.com/p/Project_0_2gkqerupw1">
+                        <button class="white-to-pink">WebAR</button>
+                    </a>
+                </div>
+            </figure>
+        </div>
+        <br>
+        <br>
+        <div class="image-section">
+            <figure>
+                <img src="Thyroid.png" alt="Thyroid">
+                <figcaption>Thyroid</figcaption>
+                <br>
+                <div class="buttons">
+                    <a href="https://mywebar.com/p/Project_1_xqe5ksjknd">
+                        <button class="white-to-pink">WebAR</button>
+                    </a>
+                </div>
+            </figure>
+        </div>
+    </div>
+    
+
+    <script>
+        function openQRWindow(imageName) {
+            // Specify the path to the QR image based on the imageName parameter
+            var qrImagePath = imageName + "png";
+            
+            // Open a new window with the specified image
+            var newWindow = window.open("", "_blank");
+
+            newWindow.document.write("<html><head><title>QR Code</title></head><body><img src='" + qrImagePath + "' alt='QR Code'></body></html>");
+        }
+    </script>
+</body>
+</html>
